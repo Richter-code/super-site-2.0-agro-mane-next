@@ -1,0 +1,25 @@
+Build: pnpm build (Next.js 14.2.5) on 2025-11-22. Nota: o parâmetro "--analyze" não é aceito pelo CLI atual; o relatório abaixo foi derivado de `next build` + `build-manifest.json`.
+
+Resumo numérico
+- First Load JS global: 149 kB
+- JS compartilhado: 87.1 kB
+- Maior rota: `/` (42.1 kB)
+- Maior chunk compartilhado: `chunks/8958f763-ec6469e96f8564f0.js` ≈ 53.6 kB (componentes shadcn/ui + animações)
+- Segundo chunk compartilhado: `chunks/228-d7e7b387e9de9500.js` ≈ 31.5 kB (cart + checkout)
+
+Bundles a observar
+1. `chunks/8958f763-ec6469e96f8564f0.js`
+   - Contém HeroSection, CategoryGrid e tokens shadcn/ui usados no layout.
+   - Sugestão: carregar animações framer-motion apenas nas seções que realmente animam.
+2. `chunks/228-d7e7b387e9de9500.js`
+   - Reúne CartDrawer, CheckoutStepsHeader e formulários completos, mesmo em páginas onde o carrinho não abre.
+   - Sugestão: importar dinamicamente o drawer/checkout somente após interação do usuário.
+
+Componentes indicados para `dynamic import`
+- `src/components/cart/CartDrawer.tsx` — modal pesado com formulários e ícones; pode ser carregado somente após clicar no ícone do carrinho.
+- `src/components/checkout/CheckoutStepsHeader.tsx` — apenas nas rotas de checkout; mover para dynamic import dentro da page.
+- `src/components/products/filters/ProductFiltersBar.tsx` — usa Radix + vários inputs; pode carregar sob demanda em telas grandes.
+
+Próximas iterações
+- Habilitar um analisador de bundle oficial (`@next/bundle-analyzer`) para validar reduções futuras.
+- Revisar se scripts shadcn/ui duplicados podem ser isolados em componentes menores.

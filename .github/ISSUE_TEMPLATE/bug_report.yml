@@ -1,0 +1,20 @@
+name: 'Bug report'
+description: Reporte um bug
+labels: [bug]
+body:
+  - type: input
+    id: rota
+    attributes:
+      label: Rota/página
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos para reproduzir
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamento esperado
+  - type: textarea
+    id: atual
+    attributes:
+      label: Comportamento atual

@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --background: 110 30% 98%;
+  --foreground: 150 12% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 150 12% 16%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 150 12% 16%;
+  --primary: 142 44% 32%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 39 64% 88%;
+  --secondary-foreground: 25 35% 20%;
+  --muted: 141 20% 88%;
+  --muted-foreground: 140 14% 32%;
+  --accent: 26 46% 82%;
+  --accent-foreground: 24 30% 18%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 134 18% 82%;
+  --input: 134 18% 82%;
+  --ring: 142 48% 32%;
+  --radius: 1.25rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: 150 10% 8%;
+  --foreground: 142 15% 94%;
+  --card: 150 8% 12%;
+  --card-foreground: 142 15% 94%;
+  --popover: 150 8% 14%;
+  --popover-foreground: 142 15% 94%;
+  --primary: 142 44% 45%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 35 34% 24%;
+  --secondary-foreground: 42 45% 88%;
+  --muted: 150 8% 22%;
+  --muted-foreground: 140 10% 72%;
+  --accent: 26 38% 28%;
+  --accent-foreground: 25 55% 90%;
+  --destructive: 0 73% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 150 9% 26%;
+  --input: 150 9% 26%;
+  --ring: 142 44% 48%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  font-feature-settings:
+    'liga' 1,
+    'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold tracking-tight text-foreground;
+  }
+  p {
+    @apply text-base leading-relaxed text-muted-foreground;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .focus-ring {
+    @apply transition-shadow duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .surface-card {
+    @apply border border-border bg-card/90 shadow-card transition-colors;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

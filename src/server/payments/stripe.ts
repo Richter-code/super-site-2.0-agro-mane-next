@@ -1,0 +1,18 @@
+import Stripe from 'stripe';
+
+let stripeClient: Stripe | null = null;
+
+export function getStripeClient() {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error(
+      'Stripe não configurado. Defina STRIPE_SECRET_KEY no .env.',
+    );
+  }
+
+  if (!stripeClient) {
+    stripeClient = new Stripe(secretKey);
+  }
+
+  return stripeClient;
+}

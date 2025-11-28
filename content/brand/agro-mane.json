@@ -1,0 +1,47 @@
+{
+  "nome": "Agropecuária do Mané",
+  "instagram": "https://www.instagram.com/agropecuariadomane/",
+  "descricao_curta": "Rede de lojas de Pet, Piscina e Jardim em Piracicaba/SP, com orientação veterinária todos os dias.",
+  "endereco": "Rua São José, 1121 - Cidade Alta, Piracicaba/SP, 13419-250",
+  "cidade": "Piracicaba/SP",
+  "horario_funcionamento": "Atendimento em horário comercial; consulte horários por unidade nas redes sociais.",
+  "telefone": "(19) 3437-7777",
+  "whatsapp": "https://wa.me/5519997780777",
+  "email": "mane@agropecuariadomane.com.br",
+  "contato_unico": true,
+  "links_uteis": [
+    {
+      "rotulo": "Instagram",
+      "url": "https://www.instagram.com/agropecuariadomane/"
+    },
+    { "rotulo": "WhatsApp", "url": "https://wa.me/5519997780777" }
+  ],
+  "categorias": ["Pet", "Piscina", "Jardim", "Agro", "Vet"],
+  "beneficios": [
+    "Rede com várias lojas em Piracicaba",
+    "Orientação veterinária todos os dias",
+    "Entrega e atendimento por WhatsApp",
+    "Variedade em rações, acessórios, piscina e jardim"
+  ],
+  "faq": [
+    {
+      "pergunta": "Vocês têm mais de uma loja em Piracicaba?",
+      "resposta": "Sim, a AgroMané conta com diversas unidades na cidade. Consulte nossas redes sociais para encontrar a unidade mais próxima."
+    },
+    {
+      "pergunta": "Atendem por WhatsApp?",
+      "resposta": "Sim, atendemos pedidos, dúvidas e agendamentos pelo WhatsApp oficial da unidade Centro: (19) 99778-0777."
+    },
+    {
+      "pergunta": "Quais categorias de produtos vocês trabalham?",
+      "resposta": "Trabalhamos com linhas completas para pet, piscina, jardim, agro e produtos veterinários."
+    }
+  ],
+  "site_url": "https://www.agropecuariadomane.com.br",
+  "logo_sources": {
+    "avif": "/brand/logo-mane.avif",
+    "webp": "/brand/logo-mane.webp",
+    "png": "/brand/logo-mane.png"
+  },
+  "og_image": "/brand/logo-mane.webp"
+}

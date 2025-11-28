@@ -1,0 +1,233 @@
+nohup: ignorando entrada
+
+> agro-mane-next@0.1.0 dev /home/davi/super site 2.0/agro-mane-next
+> next dev --hostname 0.0.0.0 -p 3001
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3001
+  - Network:      http://0.0.0.0:3001
+
+ ✓ Starting...
+ ✓ Ready in 3.7s
+ ○ Compiling / ...
+ ✓ Compiled / in 7.6s (1594 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ HEAD / 200 in 7975ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 197ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 145ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 61ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 75ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 94ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 43ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 53ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 82ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 84ms
+ ○ Compiling /categorias/[category] ...
+ ✓ Compiled /categorias/[category] in 77.6s (1608 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/vet. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/pet. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1551892589-865f69869443?auto=format&fit=crop&w=800&q=80 404
+ ✓ Compiled in 449ms (828 modules)
+ ✓ Compiled in 233ms (828 modules)
+ ✓ Compiled in 668ms (1608 modules)
+ ✓ Compiled in 580ms (1608 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 265ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/agro. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /categorias/agro 200 in 187ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 59ms
+ ⨯ ./src/data/categories.ts
+Error: 
+  [31mx[0m Expected ',', got ':'
+    ,-[[36;1;4m/home/davi/super site 2.0/agro-mane-next/src/data/categories.ts[0m:80:1]
+ [2m80[0m |     hasProductListing: true,
+ [2m81[0m |   },
+ [2m82[0m |       // cardImage removed: using animated placeholder instead (Agro will keep text-only per prior request)
+ [2m83[0m |     slug: 'agro',
+    : [31;1m        ^[0m
+ [2m84[0m |     name: 'Agro',
+ [2m85[0m |     description:
+ [2m86[0m |       'Insumos agrícolas, sementes de alta produtividade e nutrição animal.',
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/data/categories.ts
+./src/app/categorias/[category]/page.tsx
+ ✓ Compiled in 121ms (828 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 960ms (1594 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 531ms (1608 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 180ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ○ Compiling /produtos ...
+ ✓ Compiled /produtos in 1142ms (1675 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /produtos. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled /api/produtos in 362ms (897 modules)
+ GET /api/produtos?page=1&pageSize=12 200 in 489ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /produtos. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /api/produtos?page=1&pageSize=12 200 in 5ms
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1502219422320-9b38e61c63de?auto=format&fit=crop&w=800&q=80 404
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1551892589-865f69869443?auto=format&fit=crop&w=800&q=80 404
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⨯ upstream image response failed for https://images.unsplash.com/photo-1551892589-865f69869443?auto=format&fit=crop&w=800&q=80 404
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 148ms
+ ✓ Compiled in 837ms (1693 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 406ms (1694 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 683ms (1694 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 552ms (1700 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 968ms (1700 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⨯ src/components/products/ProductCard.tsx (18:16) @ getCategoryIcon
+ ⨯ ReferenceError: getCategoryIcon is not defined
+    at ProductCard (./src/components/products/ProductCard.tsx:25:18)
+digest: "3291061243"
+[0m [90m 16 |[39m [36mexport[39m [36mfunction[39m [33mProductCard[39m({ product }[33m:[39m [33mProductCardProps[39m) {[0m
+[0m [90m 17 |[39m   [36mconst[39m [isHovered[33m,[39m setIsHovered] [33m=[39m useState([36mfalse[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 18 |[39m   [36mconst[39m icon [33m=[39m getCategoryIcon(product[33m.[39mcategory)[33m;[39m[0m
+[0m [90m    |[39m                [31m[1m^[22m[39m[0m
+[0m [90m 19 |[39m[0m
+[0m [90m 20 |[39m   [36mreturn[39m ([0m
+[0m [90m 21 |[39m     [33m<[39m[33mCard[39m[0m
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /categorias/jardim 500 in 378ms
+ ✓ Compiled in 38.4s (1702 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /categorias/jardim 200 in 320ms
+ ✓ Compiled in 1067ms (826 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 2.2s (826 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 5330ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /categorias/jardim 200 in 397ms
+ GET / 200 in 448ms
+ ✓ Compiled in 661ms (826 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 604ms (876 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 1543ms (1702 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 40.7s (1702 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 629ms (826 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 1501ms (1702 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ✓ Compiled in 1068ms (1702 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /categorias/jardim. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 466ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /produtos. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ○ Compiling /api/produtos ...
+ ✓ Compiled /api/produtos in 769ms (906 modules)
+ GET /api/produtos?page=1&pageSize=12 200 in 1109ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /produtos. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ⚠ Unsupported metadata viewport is configured in metadata export in /produtos. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET /api/produtos?page=1&pageSize=12 200 in 36ms
+ ○ Compiling /lojas ...
+ ✓ Compiled /lojas in 1006ms (1725 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /lojas. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ○ Compiling /checkout ...
+ ✓ Compiled /checkout in 1852ms (1892 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /checkout. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport

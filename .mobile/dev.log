@@ -1,0 +1,12 @@
+
+> agro-mane-next@0.1.0 dev:host /home/davi/super site 2.0/agro-mane-next
+> next dev -H 0.0.0.0 -p 3001
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3001
+  - Network:      http://0.0.0.0:3001
+
+ ✓ Starting...
+ ✓ Ready in 2.3s
+[?25h
+ ELIFECYCLE  Command failed.

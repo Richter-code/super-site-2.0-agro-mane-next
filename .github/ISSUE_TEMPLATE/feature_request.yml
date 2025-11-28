@@ -1,0 +1,19 @@
+name: 'Feature request (BMAD)'
+description: Solicitar uma nova funcionalidade seguindo BMAD
+labels: [feature]
+body:
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto (por quê?)
+      description: Objetivo de negócio, usuários afetados, métricas
+  - type: textarea
+    id: escopo
+    attributes:
+      label: Escopo
+      description: O que entra/Não entra
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Critérios de aceite
+      description: Lista de checks para dar como pronto

@@ -1,0 +1,60 @@
+nohup: ignorando entrada
+
+> agro-mane-next@0.1.0 dev /home/davi/super site 2.0/agro-mane-next
+> next dev -p 3001 -p 3001
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3001
+
+ ✓ Starting...
+ ✓ Ready in 1558ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1748ms (1571 modules)
+ GET / 200 in 1980ms
+ GET / 200 in 59ms
+ GET / 200 in 39ms
+ GET / 200 in 38ms
+ GET / 200 in 49ms
+ GET / 200 in 34ms
+ GET / 200 in 35ms
+ GET / 200 in 56ms
+ ✓ Compiled in 1144ms (1585 modules)
+ ✓ Compiled in 595ms (1585 modules)
+ ✓ Compiled in 394ms (775 modules)
+ ✓ Compiled in 184ms (775 modules)
+ ✓ Compiled in 590ms (1585 modules)
+ ✓ Compiled in 284ms (1585 modules)
+ ✓ Compiled in 448ms (775 modules)
+ ✓ Compiled in 198ms (775 modules)
+ ✓ Compiled in 165ms (775 modules)
+ ✓ Compiled in 137ms (775 modules)
+ ✓ Compiled in 227ms (775 modules)
+ ✓ Compiled in 194ms (775 modules)
+ ✓ Compiled in 162ms (775 modules)
+ ✓ Compiled in 265ms (775 modules)
+ ✓ Compiled in 753ms (775 modules)
+ ✓ Compiled in 317ms (775 modules)
+ ✓ Compiled in 266ms (775 modules)
+ ✓ Compiled in 663ms (775 modules)
+ ✓ Compiled in 406ms (775 modules)
+ ✓ Compiled in 266ms (775 modules)
+ ✓ Compiled in 697ms (775 modules)
+ ✓ Compiled in 295ms (775 modules)
+ ✓ Compiled in 268ms (775 modules)
+ ✓ Compiled in 551ms (775 modules)
+ ✓ Compiled in 306ms (775 modules)
+ ✓ Compiled in 353ms (775 modules)
+ ✓ Compiled in 482ms (775 modules)
+ ✓ Compiled in 256ms (775 modules)
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 326ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 95ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 51ms
+ ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ GET / 200 in 51ms
