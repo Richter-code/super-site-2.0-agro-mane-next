@@ -1,0 +1,14 @@
+# Dependencies & build
+node_modules/
+.next/
+dist/
+.out/
+# Logs & env
+*.log
+.env*
+# Tools
+.vercel/
+coverage/
+# OS/editor
+.DS_Store
+*.local
