@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Instagram, Menu, PhoneCall, X } from 'lucide-react';
+import { Instagram, Menu, Phone, PhoneCall, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { cn } from '@/lib/utils';
 import { CartDrawer } from '@/components/cart/CartDrawer';
-import { brand, getInstagramLink } from '@/lib/brand';
+import { brand, getInstagramLink, getPhoneLink } from '@/lib/brand';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { buildWhatsappLink } from '@/lib/whatsapp';
@@ -26,12 +26,17 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const instagramHref = getInstagramLink();
+  const phoneHref = getPhoneLink();
   const whatsappHref = buildWhatsappLink({
     message:
       'Olá! Vim do site da Agro Mané e gostaria de falar com um especialista.',
   });
   const instagramTarget = instagramHref ? '_blank' : undefined;
   const whatsappTarget = whatsappHref ? '_blank' : undefined;
+  const [streetFragment, rawDistrict] = brand.endereco?.split('-') ?? [];
+  const streetLabel = streetFragment?.trim();
+  const district = rawDistrict?.split(',')[0]?.trim();
+  const locationLabel = district ? `Loja ${district}` : 'Piracicaba • Rede oficial';
 
   const isActive = (href: string) =>
     href.startsWith('/#') ? false : pathname === href;
@@ -97,7 +102,26 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          {streetLabel && (
+            <div className="hidden min-w-[12rem] flex-col text-right lg:flex">
+              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+                {locationLabel}
+              </span>
+              <span className="text-sm text-foreground">{streetLabel}</span>
+            </div>
+          )}
           <ThemeToggle />
+          {brand.telefone && (
+            <Button
+              variant="outline"
+              asChild
+              className="focus-ring hidden items-center gap-2 rounded-full border-border/70 text-sm text-foreground transition-colors duration-200 ease-out hover:border-primary hover:text-primary lg:inline-flex"
+            >
+              <Link href={phoneHref || '#contato'} aria-label="Ligar para a unidade Centro">
+                <Phone size={16} aria-hidden /> {brand.telefone}
+              </Link>
+            </Button>
+          )}
           <Button
             variant="ghost"
             asChild
@@ -192,6 +216,18 @@ export function Header() {
                 <Instagram size={18} aria-hidden /> Ver no Instagram
               </Link>
             </Button>
+            {brand.telefone && (
+              <Button variant="secondary" asChild className="focus-ring w-full">
+                <Link
+                  href={phoneHref || '#contato'}
+                  className="inline-flex items-center justify-center gap-2"
+                  aria-label="Ligar para a unidade Centro"
+                  aria-disabled={!phoneHref}
+                >
+                  <Phone size={18} aria-hidden /> Ligar para a loja
+                </Link>
+              </Button>
+            )}
             <div className="pt-2">
               <ThemeToggle className="w-full justify-center" />
             </div>
