@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Instagram, Menu, Phone, PhoneCall, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -25,6 +25,7 @@ export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const instagramHref = getInstagramLink();
   const phoneHref = getPhoneLink();
   const whatsappHref = buildWhatsappLink({
@@ -56,6 +57,43 @@ export function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Focus trap e teclas de atalho no menu mobile
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const container = mobileMenuRef.current;
+    if (!container) return;
+
+    const focusable = Array.from(
+      container.querySelectorAll<HTMLElement>(
+        'a, button, [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((el) => !el.hasAttribute('disabled'));
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    first?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab' || focusable.length === 0) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
 
   const headerClasses = cn(
     'sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 motion-safe:transition-all motion-safe:duration-300',
@@ -178,9 +216,11 @@ export function Header() {
       {isMenuOpen && (
         <div
           id="menu-principal-mobile"
+          ref={mobileMenuRef}
           className="border-t border-border/80 bg-card/95 shadow-lg shadow-black/10 transition-all"
-          role="navigation"
-          aria-label="Navegação principal móvel"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu principal"
         >
           <Container className="flex flex-col gap-4 py-6">
             {NAV_LINKS.map((item) => (

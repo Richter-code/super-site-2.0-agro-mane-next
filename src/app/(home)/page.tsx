@@ -10,7 +10,12 @@ import {
 } from 'lucide-react';
 
 import { CategoryGrid } from '@/components/home/CategoryGrid';
+import { CredibilityBadges } from '@/components/home/CredibilityBadges';
 import { HeroSection } from '@/components/home/HeroSection';
+import { OurStorySection } from '@/components/home/OurStorySection';
+import { TestimonialsGrid } from '@/components/home/TestimonialsGrid';
+import { DifferentialsSection } from '@/components/home/DifferentialsSection';
+import { TeamSection } from '@/components/home/TeamSection';
 import { InstagramFeed } from '@/features/branding/InstagramFeed';
 import { Container } from '@/components/ui/container';
 import { brand, ogImage, siteUrl } from '@/lib/brand';
@@ -61,26 +66,26 @@ const defaultBenefits = [
   {
     icon: ShieldCheck,
     title: 'Rede Agro Mané',
-    description: 'Várias lojas em Piracicaba com estoque e serviços completos.',
-  },
-  {
-    icon: Truck,
-    title: 'Atendimento próximo',
-    description:
-      'Fale no WhatsApp e combine retirada rápida ou entrega com parceiros locais.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Orientação especializada',
-    description:
-      'Equipe técnica e veterinária para montar o mix ideal de cada projeto.',
-  },
-  {
-    icon: MessageCircle,
-    title: 'Pós-venda humano',
-    description:
-      'Suporte contínuo para piscina, jardim, pets e fazenda sem burocracia.',
-  },
+      description: 'Várias lojas em Piracicaba com estoque e serviços completos.',
+    },
+    {
+      icon: Truck,
+      title: 'Atendimento próximo',
+      description:
+      'Fale no WhatsApp e combine retirada rápida ou entrega com parceiros locais, sem enrolação.',
+    },
+    {
+      icon: Sparkles,
+      title: 'Orientação especializada',
+      description:
+      'Equipe técnica e veterinária para montar o mix ideal e evitar compras erradas.',
+    },
+    {
+      icon: MessageCircle,
+      title: 'Pós-venda humano',
+      description:
+      'Suporte contínuo para piscina, jardim, pets e fazenda — com resposta rápida e sem burocracia.',
+    },
 ];
 
 const benefitCopy =
@@ -102,7 +107,12 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
+      <OurStorySection />
       <BenefitsHighlights />
+      <CredibilityBadges />
+      <DifferentialsSection />
+      <TeamSection />
+      <TestimonialsGrid />
       <CategoryGrid categories={primaryCategories} id="categorias" />
       <AgroVetSection agro={agroCategory} vet={vetCategory} />
       <InstagramFeed />
@@ -112,19 +122,47 @@ export default function HomePage() {
 
 function BenefitsHighlights() {
   return (
-    <section className="py-10">
-      <Container className="rounded-[2rem] border border-border bg-card/90 p-8 shadow-card ring-1 ring-border/70">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="py-12">
+      <Container className="space-y-8 rounded-[2rem] border border-border/70 bg-card/95 p-8 shadow-dune ring-1 ring-border/70 backdrop-blur">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+              Benefícios da rede
+            </p>
+            <h2 className="text-3xl font-semibold text-foreground">
+              Atendimento próximo e completo
+            </h2>
+            <p className="max-w-2xl text-sm text-muted-foreground">
+              Estoque local, time técnico e suporte pós-compra para pet, piscina
+              e projetos de campo.
+            </p>
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-foreground/5 px-4 py-2 text-[0.75rem] font-semibold uppercase tracking-[0.32em] text-muted-foreground shadow-card ring-1 ring-border/70">
+            Rede Agro Mané • Piracicaba
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map(({ icon: Icon, title, description }) => (
-            <article key={title} className="flex gap-4">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-100/70 text-brand-800 dark:bg-brand-200/30 dark:text-brand-50">
-                <Icon size={24} aria-hidden />
-              </span>
-              <div className="space-y-1">
+            <article
+              key={title}
+              className="group relative flex h-full flex-col gap-3 overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-card/90 via-card/80 to-muted/70 p-5 shadow-card transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-dune"
+            >
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-sand-400/10" />
+              </div>
+              <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-foreground text-background shadow-card">
+                <Icon size={22} aria-hidden />
+              </div>
+              <div className="relative space-y-1">
                 <h3 className="text-base font-semibold text-foreground">
                   {title}
                 </h3>
-                <p className="text-sm text-muted-foreground">{description}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {description}
+                </p>
               </div>
             </article>
           ))}
@@ -180,8 +218,8 @@ function AgroVetSection({ agro, vet }: AgroVetSectionProps) {
             Agro e Vet com assinatura Agro Mané
           </h2>
           <p className="max-w-3xl text-sm text-muted-foreground">
-            Consultoria direta da equipe para fazenda e clínica: escolha insumos
-            agrícolas ou atendimento veterinário com a segurança da nossa rede.
+            Consultoria direta da equipe para fazenda e clínica: escolhemos juntos insumos agrícolas
+            ou atendimento veterinário com segurança e linguagem simples.
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-2">

@@ -19,6 +19,8 @@ export function AddToCartButton({
   ...props
 }: AddToCartButtonProps) {
   const addToCart = useCart((state) => state.addToCart);
+  const [announcement, setAnnouncement] = React.useState('');
+  const announceTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     onClick?.(event);
@@ -26,15 +28,32 @@ export function AddToCartButton({
       return;
     }
     addToCart(product, quantity);
+    setAnnouncement(`${product.name} adicionado ao carrinho.`);
+    if (announceTimeoutRef.current) {
+      clearTimeout(announceTimeoutRef.current);
+    }
+    announceTimeoutRef.current = setTimeout(() => setAnnouncement(''), 1200);
   };
 
+  React.useEffect(() => {
+    return () => {
+      if (announceTimeoutRef.current) clearTimeout(announceTimeoutRef.current);
+    };
+  }, []);
+
   return (
-    <Button
-      {...props}
-      disabled={disabled || !product.inStock}
-      onClick={handleClick}
-    >
-      {children}
-    </Button>
+    <>
+      <Button
+        {...props}
+        disabled={disabled || !product.inStock}
+        onClick={handleClick}
+        aria-live="polite"
+      >
+        {children}
+      </Button>
+      <span className="sr-only" aria-live="polite">
+        {announcement}
+      </span>
+    </>
   );
 }

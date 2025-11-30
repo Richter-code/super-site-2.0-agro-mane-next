@@ -21,17 +21,31 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const socialImages = socialImageVariants.map((image) => ({
-  url: image,
-  type: image.endsWith('.avif')
-    ? 'image/avif'
-    : image.endsWith('.webp')
-      ? 'image/webp'
-      : undefined,
-}));
+const toAbsoluteUrl = (value: string) =>
+  value.startsWith('http')
+    ? value
+    : new URL(value, siteUrl).toString();
+
+const socialImages = socialImageVariants.map((image) => {
+  const absoluteUrl = toAbsoluteUrl(image);
+  return {
+    url: absoluteUrl,
+    type: image.endsWith('.avif')
+      ? 'image/avif'
+      : image.endsWith('.webp')
+        ? 'image/webp'
+        : undefined,
+  };
+});
+
+export const viewport = { width: 'device-width', initialScale: 1 };
+
+export const themeColor = [
+  { media: '(prefers-color-scheme: light)', color: '#efe7db' },
+  { media: '(prefers-color-scheme: dark)', color: '#18130d' },
+];
 
 export const metadata: Metadata = {
-  viewport: { width: 'device-width', initialScale: 1 },
   metadataBase: new URL(siteUrl),
   title: brand.nome,
   description: brand.descricao_curta,
@@ -62,13 +76,14 @@ export default function RootLayout({
 }) {
   const instagramLink = getInstagramLink();
   const whatsappLink = getWhatsAppLink();
+  const socialImagesAbsolute = socialImageVariants.map(toAbsoluteUrl);
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: brand.nome,
     description: brand.descricao_curta,
     url: siteUrl,
-    image: socialImageVariants.map((image) => `${siteUrl}${image}`),
+    image: socialImagesAbsolute,
     telephone: brand.telefone || undefined,
     address:
       brand.endereco || brand.cidade
@@ -95,6 +110,16 @@ export default function RootLayout({
 
   return (
     <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://picsum.photos" />
+      </head>
       <body
         className={`${inter.variable} antialiased bg-background text-foreground`}
       >

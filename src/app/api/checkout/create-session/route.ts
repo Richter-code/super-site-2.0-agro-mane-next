@@ -50,6 +50,12 @@ export async function POST(request: NextRequest) {
       if (!product) {
         throw new Error('Produto não encontrado para checkout.');
       }
+      if (!product.inStock) {
+        throw new Error(`Produto sem estoque: ${product.name}`);
+      }
+      if (quantity <= 0) {
+        throw new Error(`Quantidade inválida para ${product.name}`);
+      }
       return {
         price_data: {
           currency: 'brl',
@@ -72,6 +78,16 @@ export async function POST(request: NextRequest) {
     }
 
     const stripe = getStripeClient();
+    if (!stripe) {
+      console.warn('[checkout] Stripe indisponível: defina STRIPE_SECRET_KEY para habilitar pagamentos.');
+      return NextResponse.json(
+        {
+          error:
+            'Checkout desativado neste ambiente. Configure STRIPE_SECRET_KEY para processar pagamentos.',
+        },
+        { status: 503 },
+      );
+    }
 
     const paymentMethods = paymentMethodMap[payment.method] ?? ['card'];
 

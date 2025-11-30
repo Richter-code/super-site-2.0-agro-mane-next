@@ -2,12 +2,11 @@ import Stripe from 'stripe';
 
 let stripeClient: Stripe | null = null;
 
-export function getStripeClient() {
+export function getStripeClient(): Stripe | null {
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) {
-    throw new Error(
-      'Stripe não configurado. Defina STRIPE_SECRET_KEY no .env.',
-    );
+    // Ambiente sem Stripe configurado (dev/preview); retorna null para modo sandbox.
+    return null;
   }
 
   if (!stripeClient) {

@@ -28,6 +28,9 @@ async function getCheckoutSession(sessionId?: string) {
 
   try {
     const stripe = getStripeClient();
+    if (!stripe) {
+      return null;
+    }
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ['line_items'],
     });
@@ -43,6 +46,7 @@ export default async function CheckoutSuccessPage({
 }: {
   searchParams: { session_id?: string };
 }) {
+  const stripeEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
   const session = await getCheckoutSession(searchParams.session_id);
   const amountTotal = session?.amount_total ? session.amount_total / 100 : null;
   const paymentStatus = session?.payment_status ?? 'processing';
@@ -59,6 +63,11 @@ export default async function CheckoutSuccessPage({
     <main className="bg-brand-hero">
       <section className="py-16">
         <Container className="space-y-10">
+          {!stripeEnabled && (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+              Checkout em modo sandbox – nenhuma cobrança real foi processada neste ambiente.
+            </div>
+          )}
           <div className="flex flex-col items-center gap-4 text-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-100 text-brand-700 shadow-card">
               <CheckCircle2 className="h-10 w-10" />

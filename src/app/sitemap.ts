@@ -16,12 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
   }));
 
-  const baseRoutes = ['', '/produtos', '/carrinho', '/checkout', '/login'].map(
-    (path) => ({
-      url: `${siteUrl}${path}`,
-      lastModified: now,
-    }),
-  );
+  const baseRoutes = ['', '/produtos', '/carrinho'].map((path) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: now,
+  }));
 
   return [...baseRoutes, ...categories, ...products];
 }

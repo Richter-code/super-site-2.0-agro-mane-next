@@ -47,7 +47,11 @@ const STEP_COPY: Record<
   },
 };
 
-export function CheckoutPageClient() {
+type CheckoutPageClientProps = {
+  stripeEnabled: boolean;
+};
+
+export function CheckoutPageClient({ stripeEnabled }: CheckoutPageClientProps) {
   const items = useCart((state) => state.items);
   const subtotal = useCart((state) => state.subtotal);
   const stepContainerRef = useRef<HTMLDivElement>(null);
@@ -108,6 +112,13 @@ export function CheckoutPageClient() {
   };
 
   const handleSubmitCheckout = useCallback(async () => {
+    if (!stripeEnabled) {
+      setCheckoutError(
+        'Checkout em modo sandbox – nenhum pagamento real será processado neste ambiente.',
+      );
+      return;
+    }
+
     try {
       await confirmOrder(async () => {
         setCheckoutError(null);
@@ -152,7 +163,7 @@ export function CheckoutPageClient() {
           : 'Não foi possível iniciar o pagamento.',
       );
     }
-  }, [confirmOrder, form, items]);
+  }, [confirmOrder, form, items, stripeEnabled]);
 
   const handleStepSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -182,6 +193,8 @@ export function CheckoutPageClient() {
   const currentCopy = STEP_COPY[currentStep];
   const shouldShowAsideSummary = currentStep !== 'review';
   const primaryLabel = currentCopy.cta;
+  const stripeDisabled = !stripeEnabled;
+  const primaryDisabled = isAdvancing || (stripeDisabled && currentStep === 'review');
 
   return (
     <div
@@ -190,6 +203,11 @@ export function CheckoutPageClient() {
       aria-live="polite"
     >
       <div className="space-y-8" ref={stepContainerRef}>
+        {stripeDisabled && (
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+            Checkout em modo sandbox – nenhum pagamento real será processado neste ambiente.
+          </div>
+        )}
         <CheckoutStepsHeader
           currentStep={currentStep}
           onStepChange={handleStepChange}
@@ -199,6 +217,14 @@ export function CheckoutPageClient() {
           title={currentCopy.title}
           description={currentCopy.description}
         >
+          {checkoutError && (
+            <div className="rounded-2xl border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+              <p>{checkoutError}</p>
+              <p className="mt-1 text-xs text-destructive/80">
+                Revise a conexão ou tente novamente em instantes. Nenhuma cobrança foi realizada.
+              </p>
+            </div>
+          )}
           <form onSubmit={handleStepSubmit} className="space-y-6">
             {renderStep({
               step: currentStep,
@@ -237,9 +263,15 @@ export function CheckoutPageClient() {
       {shouldShowAsideSummary && (
         <CartSummary
           subtotal={subtotal}
-          ctaLabel={isAdvancing ? 'Validando...' : primaryLabel}
+          ctaLabel={
+            stripeDisabled
+              ? 'Pagamento desativado'
+              : isAdvancing
+                ? 'Validando...'
+                : primaryLabel
+          }
           onCheckout={handlePrimaryAction}
-          ctaDisabled={isAdvancing}
+          ctaDisabled={primaryDisabled || stripeDisabled}
           headingLevel="h2"
           ctaAriaLabel="Avançar para a próxima etapa do checkout"
         />

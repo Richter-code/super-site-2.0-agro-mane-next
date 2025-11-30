@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Script from 'next/script';
 import { notFound } from 'next/navigation';
 import {
   Clock,
@@ -71,9 +72,51 @@ export default function StorePage({ params }: StorePageProps) {
       `Olá! Gostaria de falar com a unidade ${store.shortName}.`,
   });
   const whatsappTarget = whatsappHref ? '_blank' : undefined;
+  const storeUrl = `${siteUrl}/lojas/${store.slug}`;
+
+  const storeSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Store',
+    name: store.name,
+    url: storeUrl,
+    telephone: store.phone,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: store.address.street,
+      addressLocality: store.address.city,
+      addressRegion: store.address.state,
+      postalCode: store.address.zip,
+      addressCountry: 'BR',
+    },
+    geo: store.address.coordinates
+      ? {
+          '@type': 'GeoCoordinates',
+          latitude: store.address.coordinates.lat,
+          longitude: store.address.coordinates.lng,
+        }
+      : undefined,
+    image: store.heroImage || ogImage,
+    sameAs: [brand.instagram].filter(Boolean),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: brand.nome, item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Lojas', item: `${siteUrl}/lojas` },
+      { '@type': 'ListItem', position: 3, name: store.name, item: storeUrl },
+    ],
+  };
 
   return (
     <main className="bg-brand-hero">
+      <Script id="store-jsonld" type="application/ld+json">
+        {JSON.stringify(storeSchema)}
+      </Script>
+      <Script id="store-breadcrumb-jsonld" type="application/ld+json">
+        {JSON.stringify(breadcrumbJsonLd)}
+      </Script>
       <div className="relative h-[260px] w-full overflow-hidden bg-gradient-to-br from-brand-100 via-card to-sand-100">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative flex h-20 w-20 items-center justify-center rounded-[2rem] bg-foreground text-background shadow-card">

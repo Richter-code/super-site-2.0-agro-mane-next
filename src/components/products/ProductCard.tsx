@@ -1,7 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { PawPrint, Sprout, Star, Waves, Wheat } from 'lucide-react';
+import Image from 'next/image';
+import type { LucideIcon } from 'lucide-react';
+import {
+  PawPrint,
+  ShieldCheck,
+  Sprout,
+  Star,
+  Truck,
+  Waves,
+  Wheat,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -26,22 +36,23 @@ export function ProductCard({ product }: ProductCardProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-56 w-full overflow-hidden bg-gradient-to-br from-brand-100 via-white to-sand-100">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-3xl bg-foreground text-background shadow-card transition duration-500 group-hover:scale-110 group-hover:shadow-dune">
-            <div className="absolute -top-1 -left-1 h-2 w-2 rounded-sm bg-brand-400" aria-hidden />
-            <div className="absolute -bottom-1 -right-1 h-2 w-2 rounded-sm bg-sand-400" aria-hidden />
-            {icon}
-          </div>
-        </div>
-        <div
+      <div className="relative h-56 w-full overflow-hidden bg-muted/20">
+        <Image
+          src={product.image}
+          alt={product.imageAlt || product.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className={cn(
-            'pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-500/10 to-foreground/5 opacity-0 transition group-hover:opacity-100',
-            isHovered && 'opacity-100',
+            'object-cover transition duration-700 ease-out',
+            isHovered ? 'scale-105' : 'scale-100',
           )}
         />
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground shadow-card ring-1 ring-border/70">
+          {icon}
+          <span className="text-[0.7rem]">{product.category}</span>
+        </div>
         {product.highlight && (
-          <span className="absolute left-4 top-4 rounded-full bg-card/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-foreground">
+          <span className="absolute right-4 top-4 rounded-full bg-card/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-foreground shadow-card">
             Destaque
           </span>
         )}
@@ -65,6 +76,11 @@ export function ProductCard({ product }: ProductCardProps) {
         </p>
       </CardHeader>
       <CardContent className="mt-auto flex flex-col gap-4 px-6 pb-6">
+        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+          <TrustBadge icon={Truck} label="Entrega 48h" />
+          <TrustBadge icon={ShieldCheck} label="Garantia 30d" />
+          <TrustBadge icon={Star} label={`${product.rating.toFixed(1)} / 5`} />
+        </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">A partir de</span>
           <strong className="text-2xl font-semibold text-foreground">
@@ -101,4 +117,18 @@ function getCategoryIcon(category: Product['category']) {
     default:
       return <Sprout className="h-7 w-7" aria-hidden />;
   }
+}
+
+function TrustBadge({
+  icon: Icon,
+  label,
+}: {
+  icon: LucideIcon;
+  label: string;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-muted/50 px-3 py-1 font-semibold uppercase tracking-[0.3em] text-[0.68rem]">
+      <Icon size={12} aria-hidden /> {label}
+    </span>
+  );
 }

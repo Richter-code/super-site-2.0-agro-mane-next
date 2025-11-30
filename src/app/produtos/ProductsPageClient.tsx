@@ -55,6 +55,7 @@ export function ProductsPageClient({
   const isFirstRender = useRef(true);
   const [isPending, startTransition] = useTransition();
   const pageSizeRef = useRef(pageSize);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     return () => {
@@ -81,6 +82,7 @@ export function ProductsPageClient({
       const controller = new AbortController();
       abortControllerRef.current = controller;
       setIsHydrating(true);
+      setErrorMessage(null);
 
       // Add simple pagination passthrough if present in params
       const query = nextParams.toString();
@@ -100,6 +102,7 @@ export function ProductsPageClient({
             return;
           }
           console.error('Erro ao atualizar catálogo', error);
+          setErrorMessage('Não foi possível atualizar o catálogo. Verifique sua conexão e tente novamente.');
         })
         .finally(() => {
           if (abortControllerRef.current === controller) {
@@ -128,6 +131,7 @@ export function ProductsPageClient({
     loadMoreControllerRef.current = controller;
 
     setIsLoadingMore(true);
+    setErrorMessage(null);
 
     fetch(`/api/produtos?${params.toString()}`, {
       signal: controller.signal,
@@ -145,6 +149,7 @@ export function ProductsPageClient({
           return;
         }
         console.error('Erro ao carregar mais produtos', error);
+        setErrorMessage('Falha ao carregar mais produtos. Tente novamente.');
       })
       .finally(() => {
         if (loadMoreControllerRef.current === controller) {
@@ -153,13 +158,40 @@ export function ProductsPageClient({
       });
   };
 
+  const retryFetch = () => {
+    const params = buildSearchParamsFromState(state);
+    params.set('page', String(page));
+    params.set('pageSize', String(pageSizeRef.current));
+    const query = params.toString();
+    setIsHydrating(true);
+    setErrorMessage(null);
+    fetch(`/api/produtos?${query}`, { cache: 'no-store' })
+      .then((response) => response.json())
+      .then((data: { products: Product[]; meta: ProductFiltersMeta }) => {
+        setProducts(data.products);
+        setResultsMeta(data.meta);
+        setPage(data.meta.page ?? page);
+        setHasMore(Boolean(data.meta.hasMore));
+      })
+      .catch((error: unknown) => {
+        console.error('Erro ao tentar novamente o catálogo', error);
+        setErrorMessage('Ainda não conseguimos atualizar. Verifique a conexão ou tente mais tarde.');
+      })
+      .finally(() => setIsHydrating(false));
+  };
+
   const resultsSummary = useMemo(() => buildResultsSummary(resultsMeta), [
     resultsMeta,
   ]);
   const isLoading = isPending || isHydrating;
 
   return (
-    <div className="space-y-8 py-8">
+    <div
+      className="space-y-8 py-8"
+      role="region"
+      aria-live="polite"
+      aria-busy={isLoading}
+    >
       <ProductFiltersBar
         state={state}
         handlers={handlers}
@@ -169,6 +201,20 @@ export function ProductsPageClient({
         currentMeta={resultsMeta}
         isLoading={isLoading}
       />
+      {errorMessage && (
+        <div className="rounded-2xl border border-destructive/50 bg-destructive/5 p-4 text-sm text-destructive">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span>{errorMessage}</span>
+            <button
+              type="button"
+              onClick={retryFetch}
+              className="rounded-full border border-destructive/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-destructive transition hover:bg-destructive/10"
+            >
+              Tentar novamente
+            </button>
+          </div>
+        </div>
+      )}
       <ProductGrid
         products={products}
         title="Resultados"
