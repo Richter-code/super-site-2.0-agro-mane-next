@@ -2,7 +2,7 @@
   "nome": "Agropecuária do Mané",
   "instagram": "https://www.instagram.com/agropecuariadomane/",
   "descricao_curta": "Rede de lojas de Pet, Piscina e Jardim em Piracicaba/SP, com orientação veterinária todos os dias.",
-  "endereco": "Rua São José, 1121 - Cidade Alta, Piracicaba/SP, 13419-250",
+  "endereco": "Rua São José, 1122 - Centro, Piracicaba/SP, 13419-250",
   "cidade": "Piracicaba/SP",
   "horario_funcionamento": "Atendimento em horário comercial; consulte horários por unidade nas redes sociais.",
   "telefone": "(19) 3437-7777",
@@ -14,7 +14,8 @@
       "rotulo": "Instagram",
       "url": "https://www.instagram.com/agropecuariadomane/"
     },
-    { "rotulo": "WhatsApp", "url": "https://wa.me/5519997780777" }
+    { "rotulo": "WhatsApp", "url": "https://wa.me/5519997780777" },
+    { "rotulo": "Linktree", "url": "https://linktr.ee/agromanepiracicaba" }
   ],
   "categorias": ["Pet", "Piscina", "Jardim", "Agro", "Vet"],
   "beneficios": [

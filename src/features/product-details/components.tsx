@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { PawPrint, Sprout, Waves, Wheat } from 'lucide-react';
+import { PawPrint, ShieldCheck, Sprout, Star, Truck, Waves, Wheat } from 'lucide-react';
 
 import type { Product } from '@/data/products';
 import { Button } from '@/components/ui/button';
@@ -16,18 +17,21 @@ export function ProductHero({ product }: ProductHeroProps) {
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-      <div className="relative aspect-square overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-brand-100 via-card to-sand-100">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-foreground text-background shadow-card">
-            <div className="absolute -top-2 -left-2 h-3 w-3 rounded-sm bg-brand-400" aria-hidden />
-            <div className="absolute -bottom-2 -right-2 h-3 w-3 rounded-sm bg-sand-400" aria-hidden />
-            {icon}
-          </div>
+      <div className="relative aspect-square overflow-hidden rounded-3xl border border-border bg-muted/20">
+        <Image
+          src={product.image}
+          alt={product.imageAlt || product.name}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 40vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
+        <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground shadow-card ring-1 ring-border/70">
+          {icon}
+          <span className="text-[0.75rem]">{product.category}</span>
         </div>
-        <div className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-          {product.category}
-        </div>
-        <div className="absolute bottom-5 left-5 inline-flex rounded-full bg-foreground/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-background">
+        <div className="absolute bottom-5 left-5 inline-flex rounded-full bg-foreground/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-background shadow-card">
           {badgeLabel}
         </div>
       </div>
@@ -51,6 +55,11 @@ export function ProductHero({ product }: ProductHeroProps) {
             </span>{' '}
             / 5 avaliação média
           </div>
+        </div>
+        <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+          <TrustBadge icon={Truck} label="Entrega 48h" />
+          <TrustBadge icon={ShieldCheck} label="Garantia 30d" />
+          <TrustBadge icon={Star} label="Nota verificada" />
         </div>
         <div className="flex flex-wrap gap-3">
           <AddToCartButton
@@ -196,4 +205,18 @@ function getCategoryIcon(category: Product['category']) {
     default:
       return <Sprout className="h-12 w-12" aria-hidden />;
   }
+}
+
+function TrustBadge({
+  icon: Icon,
+  label,
+}: {
+  icon: typeof Truck;
+  label: string;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-muted/40 px-3 py-1 text-[0.68rem]">
+      <Icon size={12} aria-hidden /> {label}
+    </span>
+  );
 }

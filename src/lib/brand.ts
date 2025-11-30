@@ -57,10 +57,14 @@ export const brand: BrandContent = {
   email: sanitizeValue(brandContent.email),
 };
 
-export const siteUrl =
-  brand.site_url ||
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  'https://agropecuariadomane.com.br';
+const envSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const contentSiteUrl = sanitizeValue(brand.site_url);
+const defaultSiteUrl = 'http://localhost:3001';
+
+export const siteUrl = (envSiteUrl || contentSiteUrl || defaultSiteUrl).replace(
+  /\/$/,
+  '',
+);
 
 const defaultLogoSources: Required<BrandLogoSources> = {
   avif: '/brand/logo-mane.avif',

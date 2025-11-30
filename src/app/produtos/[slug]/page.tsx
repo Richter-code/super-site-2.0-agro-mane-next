@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MessageCircle, MapPin } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 
 import { Container } from '@/components/ui/container';
 import {
@@ -40,7 +41,13 @@ export async function generateMetadata({
     };
   }
 
-  const imageUrl = product.image ?? ogImage;
+  const toAbsoluteUrl = (value: string) =>
+    value && value.startsWith('http')
+      ? value
+      : new URL(value || ogImage, siteUrl).toString();
+
+  const imageUrl = toAbsoluteUrl(product.image);
+  const canonicalUrl = new URL(`/produtos/${product.slug}`, siteUrl).toString();
 
   return {
     title: `${product.name} | ${brand.nome}`,
@@ -52,7 +59,7 @@ export async function generateMetadata({
       title: `${product.name} | ${brand.nome}`,
       description: product.description,
       type: 'website',
-      url: `${siteUrl}/produtos/${product.slug}`,
+      url: canonicalUrl,
       images: [
         {
           url: imageUrl,
@@ -79,6 +86,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   const { product, similar } = data;
+  const toAbsoluteUrl = (value: string) =>
+    value.startsWith('http')
+      ? value
+      : new URL(value, siteUrl).toString();
+  const productUrl = new URL(`/produtos/${product.slug}`, siteUrl).toString();
+  const productImage = toAbsoluteUrl(product.image || ogImage);
   const whatsappHref = buildWhatsappLink({
     message: `Olá! Gostaria de falar sobre ${product.name}.`,
   });
@@ -109,8 +122,105 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     { label: 'Suporte', value: 'Consultoria especializada pós-compra' },
   ];
 
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: productImage,
+    description: product.description,
+    sku: product.id,
+    brand: {
+      '@type': 'Brand',
+      name: brand.nome,
+    },
+    url: productUrl,
+    releaseDate: product.releaseDate || undefined,
+    category: product.category,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'BRL',
+      price: product.price.toFixed(2),
+      availability: product.inStock
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      url: productUrl,
+      seller: {
+        '@type': 'Organization',
+        name: brand.nome,
+        url: siteUrl,
+      },
+      itemCondition: 'https://schema.org/NewCondition',
+    },
+    aggregateRating: product.rating
+      ? {
+          '@type': 'AggregateRating',
+          ratingValue: product.rating,
+          reviewCount: 12,
+        }
+      : undefined,
+  };
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `Este produto ${product.inStock ? 'está disponível' : 'tem previsão de estoque'}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: product.inStock
+            ? 'Sim, o item está em estoque imediato nas unidades indicadas e pode ser reservado pelo WhatsApp.'
+            : 'No momento o item está em reabastecimento. Fale com a equipe para estimativa de chegada e alternativas compatíveis.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Posso comprar online e retirar na loja?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Sim. Combine retirada rápida pelo WhatsApp ou escolha entrega com parceiros locais e transportadoras.',
+        },
+      },
+    ],
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: brand.nome,
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Produtos',
+        item: `${siteUrl}/produtos`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.name,
+        item: productUrl,
+      },
+    ],
+  };
+
   return (
     <main className="bg-gradient-to-b from-background to-muted/40 py-12">
+      <Script id="product-jsonld" type="application/ld+json">
+        {JSON.stringify(productJsonLd)}
+      </Script>
+      <Script id="product-faq-jsonld" type="application/ld+json">
+        {JSON.stringify(faqJsonLd)}
+      </Script>
+      <Script id="product-breadcrumb-jsonld" type="application/ld+json">
+        {JSON.stringify(breadcrumbJsonLd)}
+      </Script>
       <Container className="space-y-12">
         <ProductHero product={product} />
 

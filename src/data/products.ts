@@ -9,12 +9,35 @@ export type Product = {
   price: number;
   category: ProductCategory;
   image: string;
+  imageAlt?: string;
   rating: number;
   inStock: boolean;
   tags: string[];
   highlight?: boolean;
   releaseDate?: string;
   availableAt?: StoreSlug[];
+};
+
+const productImagesByCategory: Record<
+  ProductCategory,
+  { src: string; alt: string }
+> = {
+  pet: {
+    src: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    alt: 'Produtos pet premium organizados em bancada',
+  },
+  piscina: {
+    src: 'https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    alt: 'Equipamentos e acessórios para piscinas',
+  },
+  jardim: {
+    src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    alt: 'Ferramentas de jardinagem e vasos em um jardim',
+  },
+  agro: {
+    src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    alt: 'Insumos agrícolas e sementes em bancada de fazenda',
+  },
 };
 
 export const products: Product[] = [
@@ -26,8 +49,8 @@ export const products: Product[] = [
       'Fórmula com proteínas de alta digestibilidade, prebióticos e blend de ômegas para cães adultos.',
     price: 239.9,
     category: 'pet',
-    image:
-      '/brand/logo-mane.webp',
+    image: productImagesByCategory.pet.src,
+    imageAlt: 'Saco de ração premium em destaque',
     rating: 4.8,
     inStock: true,
     tags: ['ração', 'cães', 'premium'],
@@ -44,7 +67,8 @@ export const products: Product[] = [
     price: 89.5,
     category: 'pet',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Areia sanitária para gatos em embalagem',
     rating: 4.5,
     inStock: true,
     tags: ['gatos', 'higiene'],
@@ -59,7 +83,8 @@ export const products: Product[] = [
     price: 59.9,
     category: 'pet',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1556228578-0b1dfad29e0e?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Brinquedos naturais para cães em bancada',
     rating: 4.2,
     inStock: true,
     tags: ['brinquedos', 'filhotes'],
@@ -73,8 +98,8 @@ export const products: Product[] = [
       'Condroitina + glucosamina para suporte das articulações em cães e gatos.',
     price: 129.0,
     category: 'pet',
-    image:
-      '/brand/logo-mane.webp',
+    image: productImagesByCategory.pet.src,
+    imageAlt: 'Suplemento veterinário com seringa dosadora',
     rating: 4.6,
     inStock: true,
     tags: ['saúde', 'suplemento'],
@@ -88,8 +113,8 @@ export const products: Product[] = [
       'Tratamento completo para piscinas residenciais com proteção UV.',
     price: 349.9,
     category: 'piscina',
-    image:
-      '/brand/logo-mane.webp',
+    image: productImagesByCategory.piscina.src,
+    imageAlt: productImagesByCategory.piscina.alt,
     rating: 4.7,
     inStock: true,
     tags: ['tratamento', 'cloro'],
@@ -105,7 +130,8 @@ export const products: Product[] = [
     price: 79.0,
     category: 'piscina',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Kit de teste químico para água de piscina',
     rating: 4.3,
     inStock: true,
     tags: ['teste', 'manutenção'],
@@ -120,7 +146,8 @@ export const products: Product[] = [
     price: 4299.0,
     category: 'piscina',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1618381778806-40b54dab2c2f?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Robô aspirador de piscina em operação',
     rating: 4.9,
     inStock: false,
     tags: ['limpeza', 'automação'],
@@ -135,7 +162,8 @@ export const products: Product[] = [
     price: 54.9,
     category: 'piscina',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1505764706515-aa95265c5abc?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Equipe realizando limpeza na borda da piscina',
     rating: 4.4,
     inStock: true,
     tags: ['limpeza', 'enzimático'],
@@ -148,8 +176,8 @@ export const products: Product[] = [
     description: 'Jogo completo em aço carbono com estojo e cabos ergonômicos.',
     price: 299.0,
     category: 'jardim',
-    image:
-      '/brand/logo-mane.webp',
+    image: productImagesByCategory.jardim.src,
+    imageAlt: 'Kit de ferramentas de jardinagem sobre bancada',
     rating: 4.6,
     inStock: true,
     tags: ['ferramentas', 'kit'],
@@ -165,7 +193,8 @@ export const products: Product[] = [
     price: 74.5,
     category: 'jardim',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1523419400524-c23e99d6c655?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Adubo orgânico em saco e pá de jardinagem',
     rating: 4.8,
     inStock: true,
     tags: ['adubo', 'horta'],
@@ -180,7 +209,8 @@ export const products: Product[] = [
     price: 219.9,
     category: 'jardim',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Sistema de irrigação por gotejamento instalado em horta',
     rating: 4.5,
     inStock: true,
     tags: ['irrigação', 'automação'],
@@ -195,7 +225,8 @@ export const products: Product[] = [
     price: 119.0,
     category: 'jardim',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1441123694162-e54a981ceba3?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Gramado verde em área sombreada',
     rating: 4.1,
     inStock: true,
     tags: ['gramado', 'sementes'],
@@ -209,8 +240,8 @@ export const products: Product[] = [
       'Alto potencial produtivo, genética resistente a lagartas e boa tolerância a seca.',
     price: 569.0,
     category: 'agro',
-    image:
-      '/brand/logo-mane.webp',
+    image: productImagesByCategory.agro.src,
+    imageAlt: 'Sementes de milho em mãos de produtor',
     rating: 4.7,
     inStock: true,
     tags: ['sementes', 'milho'],
@@ -225,7 +256,8 @@ export const products: Product[] = [
     price: 899.0,
     category: 'agro',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1571842469084-216e6be8f5a8?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Aplicação de herbicida em cultura',
     rating: 4.4,
     inStock: false,
     tags: ['defensivos', 'herbicida'],
@@ -240,7 +272,8 @@ export const products: Product[] = [
     price: 279.5,
     category: 'agro',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Ração para bovinos em saco e cocho ao fundo',
     rating: 4.6,
     inStock: true,
     tags: ['nutrição', 'bovinos'],
@@ -255,7 +288,8 @@ export const products: Product[] = [
     price: 2149.0,
     category: 'agro',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Pulverizador costal em área rural',
     rating: 4.3,
     inStock: true,
     tags: ['pulverizador', 'equipamento'],
@@ -271,7 +305,8 @@ export const products: Product[] = [
     price: 499.0,
     category: 'pet',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Coleira tecnológica em cachorro brincando',
     rating: 4.6,
     inStock: true,
     tags: ['tecnologia', 'gps'],
@@ -286,7 +321,8 @@ export const products: Product[] = [
     price: 189.9,
     category: 'jardim',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Vaso autoirrigável com planta decorativa',
     rating: 4.5,
     inStock: true,
     tags: ['vaso', 'decor'],
@@ -301,7 +337,8 @@ export const products: Product[] = [
     price: 3699.0,
     category: 'piscina',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Cascata de inox instalada em piscina',
     rating: 4.9,
     inStock: true,
     tags: ['cascata', 'design'],
@@ -316,7 +353,8 @@ export const products: Product[] = [
     price: 4890.0,
     category: 'agro',
     image:
-      '/brand/logo-mane.webp',
+      'https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=1200&q=80&fm=webp',
+    imageAlt: 'Sensor de solo instalado em plantação',
     rating: 4.8,
     inStock: true,
     tags: ['iot', 'monitoramento'],

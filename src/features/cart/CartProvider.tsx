@@ -30,10 +30,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
 
     const unsubscribe = store.subscribe((state) => {
-      window.localStorage.setItem(
-        CART_STORAGE_KEY,
-        JSON.stringify({ items: state.items }),
-      );
+      try {
+        window.localStorage.setItem(
+          CART_STORAGE_KEY,
+          JSON.stringify({ items: state.items }),
+        );
+      } catch (error) {
+        // Fallback silencioso quando o storage não está disponível (modo privado/offline)
+        console.warn('Storage indisponível, usando carrinho em memória', error);
+      }
     });
 
     return () => unsubscribe();

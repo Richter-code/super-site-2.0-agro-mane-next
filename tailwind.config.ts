@@ -47,16 +47,16 @@ const config: Config = {
           foreground: 'hsl(var(--destructive-foreground))',
         },
         brand: {
-          50: '#f2f9f1',
-          100: '#d9f0d6',
-          200: '#b7e2b6',
-          300: '#8bcf94',
-          400: '#63b174',
-          500: '#3f9458',
-          600: '#307547',
-          700: '#255a38',
-          800: '#1b3f29',
-          900: '#112717',
+          50: '#f6f1e8',
+          100: '#eadfc8',
+          200: '#d9c3a2',
+          300: '#c59d78',
+          400: '#a8744f',
+          500: '#8c5839',
+          600: '#70472e',
+          700: '#553725',
+          800: '#3c281c',
+          900: '#261913',
         },
         clay: {
           50: '#f9f4ef',
@@ -100,7 +100,7 @@ const config: Config = {
       },
       backgroundImage: {
         'brand-hero':
-          'radial-gradient(circle at 0% 0%, rgba(139,207,148,0.35), transparent 55%), radial-gradient(circle at 80% 0%, rgba(255,212,164,0.26), transparent 55%), linear-gradient(135deg, #fdfefc, #f3f8f0)',
+          'radial-gradient(circle at 0% 0%, rgba(196,122,59,0.28), transparent 55%), radial-gradient(circle at 80% 5%, rgba(92,107,60,0.25), transparent 55%), linear-gradient(135deg, #f7f1e6, #ece2d3)',
         'card-soft':
           'linear-gradient(130deg, rgba(255,255,255,0.95), rgba(240,247,236,0.92))',
         grain:

@@ -25,8 +25,13 @@ export function ProductGrid({
   onLoadMore,
 }: ProductGridProps) {
   return (
-    <section className="py-12">
+    <section className="py-12" aria-busy={isLoading}>
       <Container>
+        {isLoading && (
+          <p className="sr-only" aria-live="polite">
+            Atualizando resultados do catálogo...
+          </p>
+        )}
         {(title || subtitle) && (
           <div className="mb-8 space-y-2">
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-muted-foreground">
@@ -65,6 +70,7 @@ export function ProductGrid({
                   onClick={onLoadMore}
                   disabled={isLoading || isLoadingMore}
                   className="focus-ring min-w-[200px] rounded-full"
+                  aria-busy={isLoadingMore}
                 >
                   {isLoadingMore ? 'Carregando…' : 'Carregar mais'}
                 </Button>
